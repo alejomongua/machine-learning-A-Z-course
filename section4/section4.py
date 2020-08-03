@@ -34,7 +34,20 @@ plt.show()
 y_hat_test = regressor.predict(X_test)
 plt.scatter(X_test, y_test, color='red')
 plt.plot(X_test, y_hat, color='blue')
-plt.title('Salary vs Experience (training set)')
+plt.title('Salary vs Experience (test set)')
 plt.xlabel('years of experience')
 plt.ylabel('Salary')
 plt.show()
+
+# Prediction for other values, for example 12 years of experience
+
+years = 12
+prediction = regressor.predict([[years]])[0]
+print(f'Prediction for {years} years of experience: {prediction}')
+
+# Getting the equation
+
+slope = regressor.coef_[0]
+intercept = regressor.intercept_
+
+print(f'Equation: {slope} * x + {intercept}')
