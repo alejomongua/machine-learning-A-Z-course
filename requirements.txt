@@ -8,6 +8,7 @@ matplotlib==3.3.0
 mccabe==0.6.1
 numpy==1.19.1
 pandas==1.1.0
+patsy==0.5.1
 Pillow==7.2.0
 pylint==2.5.3
 pyparsing==2.4.7
@@ -17,6 +18,7 @@ scikit-learn==0.23.1
 scipy==1.5.2
 six==1.15.0
 sklearn==0.0
+statsmodels==0.11.1
 threadpoolctl==2.1.0
 toml==0.10.1
 wrapt==1.12.1

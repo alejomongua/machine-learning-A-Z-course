@@ -1,3 +1,5 @@
+# Multivariable linear regression
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -62,16 +64,46 @@ print(np.concatenate((y_hat_train.reshape(len(y_hat_train), 1), y_train.reshape(
 print("Test data:")
 print(np.concatenate((y_hat.reshape(len(y_hat), 1), y_test.reshape(len(y_test), 1)), 1))
 
-# Prediction for other values, for example 12 years of experience
-"""
-years = 12
-prediction = regressor.predict([[years]])[0]
-print(f'Prediction for {years} years of experience: {prediction}')
+# Backward Elimination
+
+import statsmodels.api as sm
+X = np.append(arr=np.ones((X.shape[0], 1)).astype(int), values=X, axis=1)
+X_opt = X[:, list(range(X.shape[1]))]
+X_opt = X_opt.astype(np.float64)
+
+SL = 0.05
+while True:
+  regressor_OLS = sm.OLS(endog = y,exog = X_opt).fit()
+  if np.amax(regressor_OLS.pvalues) > SL:
+    X_opt = np.delete(X_opt,np.argmax(regressor_OLS.pvalues),axis=1)
+    print("Deleted index ", np.argmax(regressor_OLS.pvalues), "p-value ", np.amax(regressor_OLS.pvalues))
+  else:
+    break
+
+print(regressor_OLS.summary())
+# Prediction for other values
+
+# Making a single prediction (for example the profit of a startup with:
+#   R&D Spend = 160000
+#   Administration Spend = 130000
+#   Marketing Spend = 300000
+#   State = 'California'
+
+x_input = np.array([[1, 0, 0, 160000, 130000, 300000]])
+x_input[:, 3:] = sc.transform(x_input[:, 3:])
+prediction = regressor.predict(x_input)[0]
+print(f'Prediction for R&D Spend = 160000; Administration Spend = 130000; Marketing Spend = 300000; State = California: {prediction}')
 
 # Getting the equation
 
-slope = regressor.coef_[0]
+coeffs = regressor.coef_
 intercept = regressor.intercept_
 
-print(f'Equation: {slope} * x + {intercept}')
-"""
+ecuacion = ''
+index = 0
+for coef in coeffs:
+  ecuacion = ecuacion + f'{coef} * x_{index}'
+  index += 1
+
+ecuacion = f'{ecuacion} + {intercept}'
+print(f'Equation: {ecuacion}')
