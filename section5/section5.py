@@ -102,7 +102,7 @@ intercept = regressor.intercept_
 ecuacion = ''
 index = 0
 for coef in coeffs:
-  ecuacion = ecuacion + f'{coef} * x_{index}'
+  ecuacion = ecuacion + f'+ {coef} * x_{index}'
   index += 1
 
 ecuacion = f'{ecuacion} + {intercept}'
