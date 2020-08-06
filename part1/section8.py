@@ -45,18 +45,8 @@ position = 6.5
 prediction = pr.predict(pf.fit_transform([[position]]))[0]
 print(f'Prediction for position {position}: {prediction}')
 
-"""
-# Getting the equation
+# Evaluate model performance:
 
-coeffs = pr.coef_
-intercept = pr.intercept_
-
-ecuacion = ''
-index = 0
-for coef in coeffs:
-  ecuacion = ecuacion + f'+ {coef} * x ** {index}'
-  index += 1
-
-ecuacion = f'{ecuacion} + {intercept}'
-print(f'Equation: {ecuacion}')
-"""
+from sklearn.metrics import r2_score
+score = r2_score(y, y_hat_poly)
+print(f'r2 score: {score}')

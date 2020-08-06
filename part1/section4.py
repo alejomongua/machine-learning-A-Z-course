@@ -51,3 +51,9 @@ slope = regressor.coef_[0]
 intercept = regressor.intercept_
 
 print(f'Equation: {slope} * x + {intercept}')
+
+# Evaluate model performance:
+
+from sklearn.metrics import r2_score
+score = r2_score(y_test, y_hat_test)
+print(f'r2 score: {score}')

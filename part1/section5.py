@@ -107,3 +107,10 @@ for coef in coeffs:
 
 ecuacion = f'{ecuacion} + {intercept}'
 print(f'Equation: {ecuacion}')
+
+
+# Evaluate model performance:
+
+from sklearn.metrics import r2_score
+score = r2_score(y_test, y_hat)
+print(f'r2 score: {score}')

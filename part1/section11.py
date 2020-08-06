@@ -33,3 +33,10 @@ plt.title('Salary vs Position')
 plt.xlabel('Position')
 plt.ylabel('Salary')
 plt.show()
+
+# Evaluate model performance:
+
+from sklearn.metrics import r2_score
+y_hat = regressor.predict(X)
+score = r2_score(y, y_hat)
+print(f'r2 score: {score}')

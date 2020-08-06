@@ -11,14 +11,14 @@ from sklearn.preprocessing import StandardScaler
 
 dataset = pd.read_csv('Position_Salaries.csv')
 X = dataset.iloc[:, 1:-1].values
-y = dataset.iloc[:, -1].values
+y_ = dataset.iloc[:, -1].values
 
 # Feature scaling
 
 sc_X = StandardScaler()
 sc_y = StandardScaler()
 X = sc_X.fit_transform(X)
-y = sc_y.fit_transform(y.reshape(len(y), 1))
+y = sc_y.fit_transform(y_.reshape(len(y_), 1))
 
 print("Scaled X")
 print(X)
@@ -60,3 +60,9 @@ plt.title('Salary vs Position')
 plt.xlabel('Position')
 plt.ylabel('Salary')
 plt.show()
+
+# Evaluate model performance:
+
+from sklearn.metrics import r2_score
+score = r2_score(y_, y_hat)
+print(f'r2 score: {score}')
